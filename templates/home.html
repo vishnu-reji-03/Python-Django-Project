@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+    {% block content %}
+        {% include 'navbar.html' %}
+        {% include 'category-section.html' %}
+        <!-- {% include 'carousel.html' %} -->
+        {% include 'aboutus.html' %}
+        {% include 'footer.html' %}
+    {% endblock %}
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}

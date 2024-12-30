@@ -1,0 +1,155 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>
+        /* General styling for the page */
+        .order-place-page {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+            gap: 20px;
+            width: 1200px;
+            margin: auto;
+            margin-top: 30px;
+            background-color: #f4f4f4;
+        }
+
+        .order-product-details {
+            flex: 1;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .order-product-details img {
+            max-width: 100%;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .order-product-details p {
+            font-size: 16px;
+            color: #333;
+            margin: 5px 0;
+        }
+
+        .order-form-details {
+            flex: 1;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .order-form-details table {
+            width: 100%;
+            margin-bottom: 20px;
+            border-collapse: collapse;
+        }
+
+        .order-form-details table th,
+        .order-form-details table td {
+            padding: 10px;
+            text-align: left;
+            font-size: 16px;
+        }
+
+        .order-form-details table td {
+            border-bottom: 1px solid #ddd;
+        }
+
+        .order-form-details .form-row {
+            margin-bottom: 20px;
+        }
+
+        .order-form-details input[type="text"],
+        .order-form-details input[type="email"],
+        .order-form-details input[type="number"],
+        .order-form-details select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            margin-top: 5px;
+        }
+
+        .order-form-details .payment-method {
+            margin: 20px 0;
+        }
+
+        .order-form-details label {
+            font-size: 16px;
+            margin-right: 10px;
+        }
+
+        .order-form-details .payment-method input[type="radio"] {
+            margin-right: 5px;
+        }
+
+        .order-form-details button {
+            background-color: #28a745;
+            color: white;
+            font-size: 18px;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s ease;
+        }
+
+        .order-form-details button:hover {
+            background-color: #218838;
+        }
+
+        .order-form-details input[name="csrfmiddlewaretoken"] {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- <form action="" method="post">
+        {% csrf_token %}
+        <table>
+            {{form.as_table}}
+        </table>
+        <a href=""><button type="submit">Place Order</button></a>
+    </form>
+    <h2>{{ product.product_name }}</h2>
+    <p>Price: {{ product.product_selling_price }}</p>
+    <p>Description: {{ product.small_description }}</p> -->
+    {% include 'navbar.html' %}
+    <div class="order-place-page">
+        <div class="order-product-details">
+            <img src="{{product.product_image.url}}" alt="">
+            <p>{{product.product_brand}}</p>
+            <p>{{product.product_name}}</p>
+            <p>{{product.small_description}}</p>
+            <p><span>Pay:Rs/- </span>{{product.product_selling_price}}</p>
+            <p>Delivery By:{{delivery_date}}</p>
+        </div>
+        <!-- <div class="product-order-conformation">
+            <h1>Place Your Order for {{product.product_name}} , pay {{product.product_selling_price}}</h1>
+        </div> -->
+        <div class="order-form-details" style="width: 600px; margin: auto; margin-top: 30px;">
+            <form action="" method="post">
+                {% csrf_token %}
+                <table>
+                    {{form.as_table}}
+                </table>
+                <a href=""><button type="submit">Place Order</button></a>
+            </form>
+        </div>
+        <!-- </div> -->
+</body>
+
+</html>

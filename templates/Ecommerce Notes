@@ -1,0 +1,15 @@
+Models
+
+user-name,email,address,loacation,landmark,phone number
+Products-name,cartegory,price,rating,images,quantity
+Category-cartegory_name
+Orders-name,phone number,email,address,product details,
+payment
+Rating 
+Review
+
+
+color
+background color - #2874f0
+button - color-yellowish-orange
+ button2-  #fb641b

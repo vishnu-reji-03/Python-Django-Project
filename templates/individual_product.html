@@ -1,0 +1,203 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <!-- <script>
+      document.addEventListener('DOMContentLoaded', function() {
+      const buttons = document.querySelectorAll('.heart-button');
+
+      buttons.forEach(button => {
+        const productId = button.getAttribute('data-product-id');
+
+        // Check local storage for the product's state
+        if (localStorage.getItem(`product_${productId}_in_cart`) === 'true') {
+          button.classList.add('active');
+        }
+
+        button.addEventListener('click', function() {
+          button.classList.toggle('active');
+          
+          if (button.classList.contains('active')) {
+            // Set the product as in the cart
+            localStorage.setItem(`product_${productId}_in_cart`, 'true');
+          } else {
+            // Remove the product from the cart state
+            localStorage.removeItem(`product_${productId}_in_cart`);
+          }
+        });
+      });
+    }); 
+  </script>-->
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- {% for product in product %}
+        <div class="product">
+          <h3>{{ product.product_name }}</h3>
+          <p>{{product.product_selling_price}}</p>
+          <p>{{product.product_original_price}}</p>
+          <p>{{product.small_description}}</p>
+          <p>{{product.large_description}}</p>
+          <a href="{% url 'order' product.id  %}"><button>Order Now</button></a>
+          <form method="POST" action="{% url 'add_to_cart' product.id %}">
+            {% csrf_token %}
+            <button type="submit">Add to Cart</button>
+        </form>
+        <form action="{% url 'add_to_wishlist' product.id %}">
+          {% csrf_token %}
+          <button type="submit">Add to Wishlist</button>
+        </form>
+        </div>
+      {% endfor %} -->
+  {% include 'navbar.html' %}
+  {% if messages %}
+  <div class="container mt-3">
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+      {{ message }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+  <section>
+    <div class="individual-product-container">
+
+      <div class="individual-product">
+        <div class="individual-product-image">
+          <img src="{{item.product_image.url}}" alt="">
+          {% if item.id in wishlist_items %}
+          <form action="{% url 'toggle_wishlist' item.id %}" method="post">
+            {% csrf_token %}
+            <button type="submit" class="heart-button active">
+              <span class="heart-icon red">&hearts;</span>
+            </button>
+          </form>
+          {% else %}
+          <form action="{% url 'toggle_wishlist' item.id %}" method="post">
+            {% csrf_token %}
+            <button type="submit" class="heart-button">
+              <span class="heart-icon white">&hearts;</span>
+            </button>
+          </form>
+          {% endif %}
+        </div>
+        <div class="individual-product-description">
+          <div class="individual-product-details">
+            <h5>{{item.product_brand}}</h5>
+            <h3>{{ item.product_name }}</h3>
+            <p>{{item.small_description}}</p>
+            <p>{{item.large_description}}</p>
+            <p style="color: black; font-size: large; font-weight: 500;">Delivery By: <span style="color: rgb(87, 87, 203); font-size:large; font-weight: 600;">{{delivery_date}}</span></p>
+            <div class="individual-product-price">
+              <p class="selling-price">Rs/-{{item.product_selling_price}}</p>
+              <p class="original-price"><strike>Rs/-{{item.product_original_price}}</strike></p>
+            </div>
+            <!-- <p>Rating{{avg_rating}}</p> -->
+            <div class="rating-div">
+              <p class="rating-figure">{{avg_rating}}</p>
+              <span class="star">&#9733;</span>
+            </div>
+          </div>
+          <div class="individual-product-buttons">
+            <a href="{% url 'order' item.id  %}"><button class="btn view-details-button ">Order Now</button></a>
+            <form method="POST" action="{% url 'add_to_cart' item.id %}">
+              {% csrf_token %}
+              <button class="btn add-to-cart-button" type="submit">Add to Cart</button>
+            </form>
+            <!-- <form action="{% url 'add_to_wishlist' item.id %}">
+              {% csrf_token %}
+              <button class="heart-button {% if product.id in cart_product_ids %}active{% endif %}" onclick="toggleHeart(this)" data-product-id="{{ product.id }}">
+                <span class="heart-icon">&hearts;</span>
+              </button>                         
+            </form> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="review-section">
+    <div class="review-heading">
+      <h1>Reviews</h1>
+    </div>
+    {% if review %}
+    {% for i in review %}
+    <div class="review-row">
+      <p>{{i.user.username}}</p>
+      <!-- <p>{{i.product.product_name}}</p> -->
+      <p>{{i.comment}}</p>
+      <div class="rating-div">
+        <p class="rating-figure">{{i.rating}}</p>
+        <span class="star">&#9733;</span>
+      </div>
+      <p>{{i.review_date}}</p>
+    </div>
+    {% endfor %}
+    {% else %}
+        <div class="no-review-section">
+          <p>No Reviews yet!</p>
+        </div>
+    {% endif %}
+  </div>
+
+  <div class="category-wise-products">
+    <div class="related-product-heading">
+      <h1>Related Products</h1>
+    </div>
+    <div class="container-fluid mt-4">
+        <div class="row justify-content-start g-2">
+            {% for i in related_products %}
+            <div class="custom-col mb-0">
+                <div class="card" style="width: 100%;">
+                    <img src="{{i.product_image.url}}" class="card-img-top" alt="...">
+                    <!-- <form action="{% url 'add_to_wishlist' i.id %}">
+                    {% csrf_token %}
+                    <button class="heart-button {% if product.id in cart_product_ids %}active{% endif %}" onclick="toggleHeart(this)" data-product-id="{{ product.id }}" title="Add to Wishlist">
+                      <span class="heart-icon">&hearts;</span>
+                    </button>                         
+                </form> -->
+                    {% if i.id in wishlist_items %}
+                    <form action="{% url 'toggle_wishlist' i.id %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="heart-button active">
+                            <span class="heart-icon red">&hearts;</span>
+                        </button>
+                    </form>
+                    {% else %}
+                    <form action="{% url 'toggle_wishlist' i.id %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="heart-button">
+                            <span class="heart-icon white">&hearts;</span>
+                        </button>
+                    </form>
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{i.product_name}}</h5>
+                        <p class="card-text">{{i.small_description}}</p>
+                        <div class="product-price">
+                            <p class="selling-price">Rs/-{{i.product_selling_price}}</p>
+                            <p class="original-price"><strike>Rs/-{{i.product_original_price}}</strike></p>
+                        </div>
+                        <div class="order-cart-button">
+                            <a href="{% url 'individual_product' i.id %}"><button class="btn view-details-button">View Details</button></a>
+                            <!-- <a href="{% url 'order' i.id  %}"><button class="product-button">Order Now</button></a> -->
+                            <form method="POST" action="{% url 'add_to_cart' i.id %}">
+                                {% csrf_token %}
+                                <button class="btn  add-to-cart-button" type="submit">Add to Cart</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+</body>
+
+</html>

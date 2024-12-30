@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <title>Document</title>
+    <script>
+        // This function will redirect to the home page after 10 seconds
+        setTimeout(function() {
+            window.location.href = '/';  // Change '/' to your home page URL
+        }, 5000); // 10000 milliseconds = 10 seconds
+    </script>
+</head>
+<body>
+    <div class="order-placed-animation">
+        <h1>Order Placed Successfully for {{product.product_name}}</h1>
+        <img src="{% static 'images/check_animation.gif' %}" alt="">
+    </div>
+    <div class="home-page-redirect">
+        <a href="{% url 'home' %}"><button class="btn btn-danger">Home page</button></a>
+    </div>
+</body>
+</html>

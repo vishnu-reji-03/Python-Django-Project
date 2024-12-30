@@ -1,0 +1,142 @@
+
+.login-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f2f5;
+}
+
+.login-page form {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    text-align: center;
+}
+
+/* Style the table and form fields */
+.login-page table {
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.login-page table td {
+    padding: 0.5rem 0;
+}
+
+.login-page input[type="text"],
+.login-page input[type="password"] {
+    width: 100%;
+    padding: 0.75rem;
+    margin: 0.5rem 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+/* Style the submit button */
+.login-page input[type="submit"] {
+    background-color: orangered;
+    color: white;
+    padding: 0.75rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    width: 100%;
+    margin-top: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.login-page input[type="submit"]:hover {
+    background-color: orange;
+}
+
+/* Style the register link */
+.login-page a {
+    display: block;
+    margin-top: 1rem;
+    color: #007bff; 
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+.login-page label{
+    color: #969292;
+}
+
+.login-page a:hover {
+    text-decoration: underline;
+}
+
+.signup-link{
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+}
+.signup-link p{
+    color: #969292;
+}
+
+/* sign up page */
+.helptext {
+    display: none;
+}
+.signup-page{
+    height: 100vh;
+    background-color: #f0f2f5;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+.signup-page form{
+    width: 350px;
+    height: auto;
+    padding: 2rem;
+    margin: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.signup-page table {
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.signup-page table td {
+    padding: 0.5rem 0;
+}
+.signup-page label{
+    color: #969292;
+    width: auto;
+}
+.signup-page input[type="text"],
+.signup-page input[type="password"] {
+    width: 100%;
+    padding: 0.75rem;
+    margin: 0.5rem 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+.signup-page input[type="submit"]{
+    background-color: orange;
+    color: white;
+    padding: 0.75rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    width: 100%;
+    margin-top: 1rem;
+    transition: background-color 0.3s ease;
+}
+.login-redirect{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+.login-redirect p{
+    color: orangered;
+}

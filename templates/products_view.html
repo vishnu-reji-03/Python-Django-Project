@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Smart Phones</h1>
+    {% for i in smartphone %}
+        <p>Product Name:{{i.product_name}}</p>
+        <p>Product Price:{{i.product_price}}</p>
+        <p>Product Category:{{i.product_category}}</p>
+        <img src="{{i.product_image.url}}" alt="" height="75" width="75">
+        
+        <br>
+    {% endfor %}
+    <h2>Smart Watches</h2>
+    {% for i in smartwatch %}
+        <p>Product Name:{{i.product_name}}</p>
+        <p>Product Price:{{i.product_price}}</p>
+        <p>Product Category:{{i.product_category}}</p>
+        <img src="{{i.product_image.url}}" alt="" height="75" width="75">
+        <br>
+    {% endfor %}
+</body>
+</html>

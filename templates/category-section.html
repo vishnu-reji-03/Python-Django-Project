@@ -1,0 +1,64 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>
+        /* Style for the category item */
+.category-item {
+    display: inline-block;
+    text-align: center;
+    margin: 15px;
+    transition: transform 0.3s ease;
+}
+
+/* Highlight the active category */
+.category-item.active p {
+     color: #ff6347;
+     text-decoration: underline;
+}
+
+.category-item.active img {
+    filter: brightness(1.2); /* Highlight the image */
+}
+
+.category-item.active .category-name {
+    color: #ff6347; /* Change text color */
+}
+
+    </style>
+</head>
+<body>
+    <!-- {% if messages %}
+    <div class="container mt-3">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %} -->
+    <section id="category">
+        <div class="home-category-section">
+            <div class="home-category-heading">
+                <h1>Popular categories</h1>
+            </div>
+            <div class="home-category-images">
+                {% for i in categories %}
+                <div class="category-item {% if request.resolver_match.url_name == 'category_products' and i.slug == request.resolver_match.kwargs.slug %}active{% endif %}">
+                    <button class="category-button">
+                        <a href="{% url 'category_products'  i.slug %}"><img src="{{i.category_image.url}}" alt=""></a>
+                    </button>
+                    <p class="category-name">{{i.category_title}}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    
+</body>
+</html>
